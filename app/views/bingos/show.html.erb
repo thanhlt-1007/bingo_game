@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="bingo-container-outside">
+    <div class="bingo-container">
+      <h2 class="bingo-number text-center">
+        No .<%= "%03d" % @bingo.id %>
+      </h2>
+
+      <div class="bingo-row">
+        <% @title.each do |char| %>
+          <div class="bingo-box-title">
+            <%= char %>
+          </div>
+        <% end %>
+      </div>
+
+      <% @rows.each.with_index(1) do |row, row_index| %>
+        <div class="bingo-row">
+          <% row.each.with_index(1) do |number, number_index| %>
+            <div class="bingo-box <%= "bingo-box-free" if is_free? row_index, number_index %>">
+              <div class="bingo-circle">
+                <% if is_free? row_index, number_index %>
+                  <span><%= "FREE" %></span>
+                <% else %>
+                  <span><%= number %></span>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bingo-container-outside {
+    width: 630px;
+    height: 800px;
+    padding: 20px;
+    border: 1px solid black;
+    margin-top: 100px;
+  }
+
+  .bingo-container {
+    width: 590px;
+    height: 750px;
+    margin-top: 10px;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: yellow;
+  }
+
+  .bingo-number {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  .bingo-row {
+    clear: both;
+    width: 550px;
+  }
+
+  .bingo-box {
+    float: left;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    margin: 5px;
+    text-align: center;
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.5;
+    background-color: white;
+    padding: 5px;
+  }
+
+  .bingo-box-free {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 3.1;
+  }
+
+  .bingo-box-title {
+    float: left;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    margin: 5px;
+    text-align: center;
+
+    font-size: 100px;
+    font-weight: 600;
+    line-height: 1;
+    border: none;
+    background-color: yellow;
+  }
+
+  .bingo-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 45px;
+    border: 1px solid black;
+    background-image: radial-gradient(circle, white, yellow);
+  }
+
+  .bingo-free {
+    font-size: 30px;
+    line-height: 2.4;
+  }
+</style>
